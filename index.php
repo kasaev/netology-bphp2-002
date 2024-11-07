@@ -14,19 +14,25 @@
 echo 'Числитель: ';
 $divisor = trim(fgets(STDIN));
 
-if ($divisor != intval($divisor)) {
+if (!is_numeric($divisor)) {
     fwrite(STDERR, 'Числитель не число' . PHP_EOL);
     exit(1);
-} 
+} elseif (strpos($divisor, '.')) {
+    fwrite(STDERR, 'Числитель не целое число' . PHP_EOL);
+    exit(1);
+}
 
 
 echo 'Знаменатель: '; 
 $denominator = trim(fgets(STDIN));
 
-if ($denominator != intval($denominator)) {
+if (!is_numeric($denominator)) {
     fwrite(STDERR, 'Знаменатель не число' . PHP_EOL);
     exit(1);
-} elseif ($denominator == 0) {
+} elseif (strpos($denominator, '.')) {
+    fwrite(STDERR, 'Знаменатель не целое число' . PHP_EOL);
+    exit(1);
+} elseif ((int)$denominator === 0) {
     fwrite(STDERR, 'Делить на 0 нельзя' . PHP_EOL);
     exit(1);
 }
